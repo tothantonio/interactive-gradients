@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Gradient</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="card">
+        <svg 
+             viewBox="0 0 100% 100%"
+             xmlns='http://www.w3.org/2000/svg'
+             class="noise"
+             >
+          <filter id='noiseFilter'>
+            <feTurbulence 
+                          type='fractalNoise' 
+                          baseFrequency='0.85' 
+                          numOctaves='6' 
+                          stitchTiles='stitch' />
+          </filter>
+      
+          <rect
+                width='100%'
+                height='100%'
+                preserveAspectRatio="xMidYMid meet"
+                filter='url(#noiseFilter)' />
+        </svg>
+        <div class="content">
+          <h4>Can you open the padlock?</h4>
+        </div>
+        <svg id="svg" viewBox="0 0 500 500" width="100%" height="100%">
+            <defs>
+                <g class="combination-input-template">
+                    <rect x=-25 y=-40 width=50 height=80
+                                fill="none" stroke="white"
+                                stroke-width=2 rx="3"/>
+                    <text class="text-value" x=0 y=13
+                                font-size="36"
+                                fill="white"
+                                text-anchor="middle">
+                        0
+                    </text>
+                    <path d="M0 -32 l5 10 l-10 0 z" fill="white"/>
+                    <path d="M0 32 l5 -10 l-10 0 z" fill="white"/>
+                    <rect class="up-button" x=-25 y=-40
+                                width=50 height=40
+                                fill="transparent"/>
+                    <rect class="down-button" x=-25 y=0
+                                width=50 height=40
+                                fill="transparent"/>
+                </g>
+            </defs>
+            <g id="padlock" transform="translate(250,220)">
+                <rect id='box' x=-60 y=-45
+                            width=120 height=90
+                            rx=5
+                            fill="hsl(120,50%,100%)"/>
+                <path id="bar" d="M-35 -45
+                                 v-40
+                                 c 0 -40, 70 -40, 70,0
+                                 v80"
+                            stroke-width=15
+                            stroke-linecap="round"
+                            fill="none"
+                            stroke="hsl(120,50%,100%)"/>
+            </g>
+            <g id="unlock-button" transform="translate(250,450)">
+                <text x=0 y=6
+                            font-size="16"
+                            fill="white"
+                            text-anchor="middle">
+                    unlock
+                </text>
+                <rect x=-50 y=-20 width=100 height=40
+                            fill="transparent" stroke="white"
+                            stroke-width=2 rx="3"/>
+            </g>
+            <text id="response-text" x=50% y=360
+                        font-size="50"
+                        fill="white"
+                        text-anchor="middle"
+                        opacity=0>
+                correct
+            </text>
+            <g id="combination-input-container" transform="translate(250,365)">
+            </g>
+        </svg>
+        <p>No, you can't.</p>
+    </div>
+    <div class="gradient-bg">
+        <svg 
+             viewBox="0 0 100vw 100vw"
+             xmlns='http://www.w3.org/2000/svg'
+             class="noiseBg"
+             >
+          <filter id='noiseFilterBg'>
+            <feTurbulence 
+                          type='fractalNoise'
+                          baseFrequency='0.6'
+                          stitchTiles='stitch' />
+          </filter>
+      
+          <rect
+                width='100%'
+                height='100%'
+                preserveAspectRatio="xMidYMid meet"
+                filter='url(#noiseFilterBg)' />
+        </svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="svgBlur">
+          <defs>
+            <filter id="goo">
+              <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur" />
+              <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -8" result="goo" />
+              <feBlend in="SourceGraphic" in2="goo" />
+            </filter>
+          </defs>
+        </svg>
+        <div class="gradients-container">
+          <div class="g1"></div>
+          <div class="g2"></div>
+          <div class="g3"></div>
+          <div class="g4"></div>
+          <div class="g5"></div>
+          <div class="interactive"></div>
+        </div>
+    </div>
+    <footer>
+        <p>&copy;2024 Made by Toth Antonio.</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
